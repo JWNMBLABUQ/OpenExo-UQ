@@ -2180,6 +2180,7 @@ float PJMC_PLUS::calc_motor_cmd()
 	float percent_grf = constrain(_side_data->toe_fsr, 0, 1.5);
 	float percent_grf_heel = constrain(_side_data->heel_fsr, 0, 1.5);
 	float cmd_ff = _pjmc_generic(percent_grf, threshold, dorsi_setpoint, -plantar_setpoint);
+	cmd_ff = min(dorsi_setpoint, cmd_ff); //cap the dorsiflexion setpoint
 
 	// if (!_joint_data->is_left){
 		// Serial.print("\nRunning pjmcPlus...");

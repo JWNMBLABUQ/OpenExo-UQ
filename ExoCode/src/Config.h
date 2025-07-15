@@ -21,7 +21,7 @@
 	#define AK_Board_V0_6_Maxon 5
 
     //Board that will actually be used
-    #define BOARD_VERSION AK_Board_V0_5_1       //Note: Only include name (e.g., AK_Board_V0_5_1), no need for number (e.g., 4)
+    #define BOARD_VERSION AK_Board_V0_6_Maxon       //Note: Only include name (e.g., AK_Board_V0_5_1), no need for number (e.g., 4)
     
     #define REAL_TIME_I2C 1
     #define LOOP_FREQ_HZ 500

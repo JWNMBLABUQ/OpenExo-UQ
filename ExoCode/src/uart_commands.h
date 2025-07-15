@@ -369,6 +369,8 @@ namespace UART_command_handlers
             rx_msg.data[7] = exo_data->left_side.toe_fsr;                                               //Second Tab - Bottom Orange Line
             rx_msg.data[8] = exo_data->right_side.heel_fsr;                                             //Not Plotted, Saved
             rx_msg.data[9] = exo_data->left_side.heel_fsr;                                              //Not Plotted, Saved
+			
+			// ADD ANKLE DATA; 
             break;
 
         case (uint8_t)config_defs::exo_name::bilateral_hip:

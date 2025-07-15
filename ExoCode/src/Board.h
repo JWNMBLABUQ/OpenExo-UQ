@@ -189,8 +189,8 @@
                 
                 const unsigned int speed_check_pin = 33;
 
-                const unsigned int left_ankle_angle_pin = A16;
-                const unsigned int right_ankle_angle_pin = A17;
+                const unsigned int left_ankle_angle_pin;
+                const unsigned int right_ankle_angle_pin;
             #endif
             
             const unsigned int motor_enable_on_state = HIGH;
@@ -520,8 +520,8 @@
 				
 				const unsigned int speed_check_pin;
 				
-				const unsigned int left_ankle_angle_pin;
-				const unsigned int right_ankle_angle_pin;
+				const unsigned int left_ankle_angle_pin = A13;
+				const unsigned int right_ankle_angle_pin = A12;
 				
 				// I2C 
 				// SDA 18
