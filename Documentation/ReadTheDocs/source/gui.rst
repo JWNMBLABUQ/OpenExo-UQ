@@ -10,12 +10,12 @@ Overview
 
 This application runs on any system with Python 3.12 installed. Required libraries can be installed via pip.
 
-**Open Source Application** utilizing the OpenExo API to search, connect to, and control NAU Biomechatronics Lab's OpenExo systems.
+**Open Source Application** utilizing the OpenExo API to search, connect to, and control OpenExo systems.
 
 This project is licensed under the MIT License and provides an open-source solution for accessible, modifiable control of the OpenExo system.
 
 Minimum System Requirements
---------------------------
+---------------------------
 
 **Operating System:**
 
@@ -36,9 +36,9 @@ Minimum System Requirements
 Installation Guide
 ------------------
 
-**Video Guide:** https://youtu.be/VnQeUM2K6Vg
+`Video Guide <https://youtu.be/VnQeUM2K6Vg>`__
 
-BLE (Bluetooth Low Energy) provides connections between this API and the exoskeletons. We use [Bleak](https://bleak.readthedocs.io/en/latest/) for all BLE operations.
+BLE (Bluetooth Low Energy) provides connections between this API and the exoskeletons. We use `Bleak <https://bleak.readthedocs.io/en/latest/>`__ for all BLE operations.
 
 Required Python libraries:
 
@@ -52,16 +52,16 @@ Required Python libraries:
 - micromlgen
 - pillow
 
-To install all dependencies, run::
+To install all dependencies, open the command prompt in the "Python_GUI" folder and run::
 
    python install_dependencies.py
 
 General Workflow
 ----------------
 
-Program control flow diagram::
+Program control flow diagram:
 
-   .. image:: programflow.png
+   .. image:: photos/programflow.png
       :alt: Program Control Flow
       :width: 500px
 
@@ -72,7 +72,7 @@ Starting the Application
 2. Open a terminal and navigate to the project directory.
 3. Run::
 
-   python3 GUI.py
+      python3 GUI.py
 
 4. The GUI will launch with frames for system interaction.
 
@@ -141,42 +141,46 @@ Each plot subclass has an ``animate()`` method—modify it to change data sourci
 Adding a New Frame
 ------------------
 
-1. **Create the frame class:** Add a new file (e.g., ``views/newFeature.py``)
-::
-   import tkinter as tk
+1. **Create the frame class:** Add a new file (e.g., ``views/newFeature.py``):
+   
+   .. code-block:: python
+   
+      import tkinter as tk
 
-   class NewFeature(tk.Frame):
-       def __init__(self, parent, controller):
-           super().__init__(parent)
-           self.controller = controller
+      class NewFeature(tk.Frame):
+          def __init__(self, parent, controller):
+              super().__init__(parent)
+              self.controller = controller
 
-           label = tk.Label(self, text="New Feature Frame", font=("Arial", 24))
-           label.pack(pady=20)
+              label = tk.Label(self, text="New Feature Frame", font=("Arial", 24))
+              label.pack(pady=20)
 
-           button = tk.Button(
-               self,
-               text="Go to Scan Window",
-               command=lambda: controller.show_frame("ScanWindow")
-           )
-           button.pack(pady=10)
+              button = tk.Button(
+                  self,
+                  text="Go to Scan Window",
+                  command=lambda: controller.show_frame("ScanWindow")
+              )
+              button.pack(pady=10)
 
-2. **Update the controller:** In your main app file, import and register the new frame
-::
+2. **Update the controller:** In your main app file, import and register the new frame:
 
-   from views.newFeature import NewFeature
+   .. code-block:: python
+   
+      from views.newFeature import NewFeature
 
-   for F in (ScanWindow, ActiveTrial, UpdateTorque, BioFeedback, MachineLearning, NewFeature):
-       # existing frame setup
+      for F in (ScanWindow, ActiveTrial, UpdateTorque, BioFeedback, MachineLearning, NewFeature):
+          # existing frame setup
 
-3. **Add navigation:** Create a button in any frame to show the new feature
-::
+3. **Add navigation:** Create a button in any frame to show the new feature:
 
-   button = tk.Button(
-       self,
-       text="Go to New Feature",
-       command=lambda: controller.show_frame("NewFeature")
-   )
-   button.pack(pady=10)
+   .. code-block:: python
+   
+      button = tk.Button(
+          self,
+          text="Go to New Feature",
+          command=lambda: controller.show_frame("NewFeature")
+      )
+      button.pack(pady=10)
 
 Biofeedback Frame
 -----------------
@@ -198,9 +202,11 @@ Modifying the Signal
 ~~~~~~~~~~~~~~~~~~~~
 
 1. Locate the ``FSRPlot`` class in ``chart.py``.
-2. Update the data source variable::
+2. Update the data source variable:
 
-   self.master.controller.deviceManager._realTimeProcessor._chart_data
+   .. code-block::
+
+      self.master.controller.deviceManager._realTimeProcessor._chart_data
 
 Features and Controls
 ~~~~~~~~~~~~~~~~~~~~~
