@@ -101,6 +101,32 @@ class TopPlot(BasePlot):
             title = "Data 4 and 5"
             bottomLimit = 0
             topLimit = 1.1
+            
+// Start Kayla Top Plot Addition
+
+        elif chartSelection == "Data 8-9":
+            topController = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.rightHeelFsr
+            )
+            topMeasure = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.leftHeelFsr
+            )
+            bottomLimit = 0                                                                                //what should the limits be
+            topLimit = 1.1
+            title = "Data 8 and 9"
+
+        elif chartSelection == "Data 10-11":
+            topController = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.rightAnkleAngle
+            )
+            topMeasure = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.leftAnkleAngle
+            )
+            bottomLimit = 0                                                                                //what should the limits be
+            topLimit = 1.1
+            title = "Data 10 and 11"
+
+//End Kayla Top Plot Addition
 
         if topController is None or topMeasure is None:
             topController = 0
@@ -135,11 +161,37 @@ class BottomPlot(BasePlot):
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.rightFsr
             )
             topMeasure = (
-                self.master.controller.deviceManager._realTimeProcessor._chart_data.leftFsr
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.leftFsr                        //said to edit line 137 should i leave rightFsr then
             )
             bottomLimit = 0
             topLimit = 1.1
             title = "Data 6 and 7"
+            
+// Start Kayla Bottom Plot Addition
+
+        elif chartSelection == "Data 8-9":
+            topController = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.rightHeelFsr
+            )
+            topMeasure = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.leftHeelFsr
+            )
+            bottomLimit = 0                                                                                //what should the limits be
+            topLimit = 1.1
+            title = "Data 8 and 9"
+
+        elif chartSelection == "Data 10-11":
+            topController = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.rightAnkleAngle
+            )
+            topMeasure = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.leftAnkleAngle
+            )
+            bottomLimit = 0                                                                                //what should the limits be
+            topLimit = 1.1
+            title = "Data 10 and 11"
+
+//End Kayla Bottom Plot Addition
 
         if topController is None or topMeasure is None:
             topController = 0
