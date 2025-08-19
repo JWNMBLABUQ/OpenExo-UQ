@@ -96,14 +96,18 @@ class RealTimeProcessor:
         leftSet = payload[5] if len(payload) > 5 else 0
         rightFsr = payload[6] if datalength >= 7 and len(payload) > 6 else 0
         leftFsr = payload[7] if datalength >= 8 and len(payload) > 7 else 0
-        minSV = payload[8] if datalength >= 9 and len(payload) > 8 else 0
-        maxSV = payload[9] if datalength >= 10 and len(payload) > 9 else 0
-        minSA = payload[10] if datalength >= 11 and len(payload) > 10 else 0
-        maxSA = payload[11] if datalength >= 12 and len(payload) > 11 else 0
-        battery = payload[12] if datalength >= 13 and len(payload) > 12 else 0
-        maxFSR = payload[13] if datalength >= 14 and len(payload) > 13 else 0
-        stancetime = payload[14] if datalength >= 15 and len(payload) > 14 else 0
-        swingtime = payload[15] if datalength >= 16 and len(payload) > 15 else 0
+        rightHeelFsr = payload[8] if datalength >= 9 and len(payload) > 8 else 0                                               // Added 
+        leftHeelFsr = payload[9] if datalength >= 10 and len(payload) > 9 else 0                                               // Added 
+        rightAnkleAngle = payload[10] if datalength >= 11 and len(payload) > 10 else 0                                         // Added 
+        leftAnkleAngle = payload[11] if datalength >= 12 and len(payload) > 11 else 0                                          // And increased other indices by 4
+        minSV = payload[12] if datalength >= 13 and len(payload) > 12 else 0
+        maxSV = payload[13] if datalength >= 14 and len(payload) > 13 else 0
+        minSA = payload[14] if datalength >= 15 and len(payload) > 14 else 0
+        maxSA = payload[15] if datalength >= 16 and len(payload) > 15 else 0
+        battery = payload[16] if datalength >= 17 and len(payload) > 16 else 0
+        maxFSR = payload[17] if datalength >= 18 and len(payload) > 17 else 0
+        stancetime = payload[18] if datalength >= 19 and len(payload) > 18 else 0
+        swingtime = payload[19] if datalength >= 20 and len(payload) > 19 else 0
 
         self._chart_data.updateValues(
             rightTorque,
@@ -114,6 +118,10 @@ class RealTimeProcessor:
             leftSet,
             rightFsr,
             leftFsr,
+            rightHeelFsr,                                                                                                                    //added
+            leftHeelFsr,                                                                                                                     //added
+            rightAnkleAngle,                                                                                                                 //added
+            leftAnkleAngle,                                                                                                                  //added
         )
         self._predictor.addDataPoints([minSV,maxSV,minSA,maxSA,maxFSR,stancetime,swingtime,self._predictor.state]) #add data to model, if recording data
         
@@ -130,6 +138,10 @@ class RealTimeProcessor:
             leftSet,
             rightFsr,
             leftFsr,
+            rightHeelFsr,                                                                                                                    //added but check
+            leftHeelFsr,                                                                                                                     //added
+            rightAnkleAngle,                                                                                                                 //added
+            leftAnkleAngle,                                                                                                                  //added
             #store features
             minSV,
             maxSV,
