@@ -205,15 +205,21 @@ class ActiveTrial(tk.Frame):
             self.grid_columnconfigure(j, weight=1)
             
     def toggle_chart(self):
-        """Toggle between 'Controller' and 'Sensor' for the chart."""
+        """Cycle through chart selections in order."""
         current = self.chartVar.get()
-        if current == "Data 0-3":
-            self.chartVar.set("Data 4-7")
-            self.chartButton.config(text="Data 4-7")
+        chart_order = ["Data 0-3", "Data 4-7", "Data 8-9", "Data 10-11"]
+                                                                                               // Find the next chart in the list
+        if current in chart_order:
+            current_index = chart_order.index(current)
+            next_index = (current_index + 1) % len(chart_order)                                // wrap around
+            next_chart = chart_order[next_index]
         else:
-            self.chartVar.set("Data 0-3")
-            self.chartButton.config(text="Data 0-3")
-        self.newSelection()
+            next_chart = chart_order[0]                                                        // default to first if current is invalid
+    
+        self.chartVar.set(next_chart)                                                          //Update the variable and button text
+        self.chartButton.config(text=next_chart)
+    
+        self.newSelection()                                                                    //Trigger the chart update
 
     def set_graph(self, selection):
         """Set the graph display based on the button clicked."""
