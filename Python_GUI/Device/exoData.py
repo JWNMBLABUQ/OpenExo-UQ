@@ -13,6 +13,11 @@ class ExoData:
         self.lState = []
         self.lFsr = []
         self.rFsr = []
+        #added but do we want to keep
+        self.rHeelFsr = []
+        self.lHeelFsr = []
+        self.rAnkleAngle = []
+        self.lAnkleAngle = []
         #record our features
         self.MinShankVel=[]
         self.MaxShankVel=[]
@@ -41,6 +46,10 @@ class ExoData:
         leftSet,
         rightFsr,
         leftFsr,
+        rightHeelFsr,
+        leftHeelFsr,
+        rightAnkleAngle,
+        leftAnkleAngle,
         MinSV,
         MaxSV,
         MinSA,
@@ -62,6 +71,12 @@ class ExoData:
         self.lState.append(leftState)
         self.lFsr.append(leftFsr)
         self.rFsr.append(rightFsr)
+        self.rHeelFsr.append(rightHeelFsr)          #inserted the four new data types
+        self.lHeelFsr.append(leftHeelFsr)
+        """
+        self.rAnkleAngle(rightAnkleAngle)
+        self.lAnkleAngle(leftAnkleAngle)
+        """
         self.MinShankVel.append(MinSV)
         self.MaxShankVel.append(MaxSV)
         self.MinShankAng.append(MinSA)

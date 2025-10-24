@@ -207,19 +207,19 @@ class ActiveTrial(tk.Frame):
     def toggle_chart(self):
         """Cycle through chart selections in order."""
         current = self.chartVar.get()
-        chart_order = ["Data 0-3", "Data 4-7", "Data 8-9", "Data 10-11"]
-                                                                                               // Find the next chart in the list
+        chart_order = ["Torque and State", "State and Set", "Toe FSR", "Heel FSR", "Ankle Angle"]
+                                                                                               # Find the next chart in the list
         if current in chart_order:
             current_index = chart_order.index(current)
-            next_index = (current_index + 1) % len(chart_order)                                // wrap around
+            next_index = (current_index + 1) % len(chart_order)                                # wrap around
             next_chart = chart_order[next_index]
         else:
-            next_chart = chart_order[0]                                                        // default to first if current is invalid
+            next_chart = chart_order[0]                                                        # default to first if current is invalid
     
-        self.chartVar.set(next_chart)                                                          //Update the variable and button text
+        self.chartVar.set(next_chart)                                                          #Update the variable and button text
         self.chartButton.config(text=next_chart)
     
-        self.newSelection()                                                                    //Trigger the chart update
+        self.newSelection()                                                                    #Trigger the chart update
 
     def set_graph(self, selection):
         """Set the graph display based on the button clicked."""
