@@ -90,20 +90,36 @@ class TopPlot(BasePlot):
             top_measure = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data1
             )
-            title = "Data 0 and 1"
-        elif chart_selection == "Data 4-7":
+            Title = "Right Torque and Set"
+        if chart_selection == "Data 4-7":
             top_controller = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data4
             )
             top_measure = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data5
             )
-            title = "Data 4 and 5"
+            title = "Right State and Toe FSR"
+            bottom_limit = 0
+            top_limit = 1.1  
+        if chart_selection == "Heel FSR":
+            top_measure = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.data8
+            )
+            title = "Right"
+            bottom_limit = 0
+            top_limit = 1.1  
+        elif chart_selection == "Ankle Angle":
+            top_measure = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.data10
+            )
+            title = "Right"
             bottom_limit = 0
             top_limit = 1.1
 
-        if top_controller is None or top_measure is None:
-            top_controller = 0
+        if top_controller is None:
+             top_controller = 0
+             
+        if top_measure is None:
             top_measure = 0
 
         self.x_values.append(dt.datetime.now())
@@ -120,6 +136,7 @@ class BottomPlot(BasePlot):
 
     def animate(self, chart_selection):
         top_controller = None
+        title = " "
         bottom_limit = -1
         top_limit = 1
         if chart_selection == "Data 0-3":
@@ -129,8 +146,8 @@ class BottomPlot(BasePlot):
             top_measure = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data3
             )
-            title = "Data 2 and 3"
-        elif chart_selection == "Data 4-7":
+            Title = "Left Torque and Set"
+        if chart_selection == "Data 4-7":
             top_controller = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data6
             )
@@ -139,10 +156,26 @@ class BottomPlot(BasePlot):
             )
             bottom_limit = 0
             top_limit = 1.1
-            title = "Data 6 and 7"
+            title = "Left State and Toe FSR"
+        if chart_selection == "Heel FSR":
+            top_measure = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.data9
+            )
+            bottom_limit = 0
+            top_limit = 1.1
+            title = "Left"  
+        elif chart_selection == "Ankle Angle":
+            top_measure = (
+                self.master.controller.deviceManager._realTimeProcessor._chart_data.data11
+            )
+            bottom_limit = 0
+            top_limit = 1.1
+            title = "Left"
 
-        if top_controller is None or top_measure is None:
-            top_controller = 0
+        if top_controller is None:
+             top_controller = 0
+             
+        if top_measure is None:
             top_measure = 0
 
         self.x_values.append(dt.datetime.now())

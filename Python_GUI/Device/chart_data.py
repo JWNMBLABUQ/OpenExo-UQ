@@ -6,17 +6,21 @@ class ChartData:
         self.data3 = 0.0  # leftTorque
         self.data4 = 0.0  # leftState
         self.data5 = 0.0  # leftSet
-        self.data6 = 0.0  # rightFsr
-        self.data7 = 0.0  # leftFsr
-        self.data8 = 0.0  # minSV
-        self.data9 = 0.0  # maxSV
-        self.data10 = 0.0  # battery
-        self.data11 = 0.0  # maxSA
-        self.data12 = 0.0  # battery
-        self.data13 = 0.0  # maxFSR
-        self.data14 = 0.0  # stancetime
-        self.data15 = 0.0  # swingtime
-
+        self.data6 = 0.0  # rightToeFsr
+        self.data7 = 0.0  # leftToeFsr
+        self.data8 = 0.0  # rightHeelFsr
+        self.data9 = 0.0  # leftHeelFsr
+        self.data10 = 0.0  # rightAnkleAngle
+        self.data11 = 0.0  # leftAnkleAngle
+        self.data12 = 0.0  # minSV
+        self.data13 = 0.0  # maxSV
+        self.data14 = 0.0  # minSA
+        self.data15 = 0.0  # maxSA
+        self.data16 = 0.0  # battery
+        self.data17 = 0.0  # maxFSR
+        self.data18 = 0.0  # stancetime
+        self.data19 = 0.0  # swingtime  
+        
     def updateValues(
         self,
         data0,  # rightTorque
@@ -25,16 +29,20 @@ class ChartData:
         data3,  # leftTorque
         data4,  # leftState
         data5,  # leftSet
-        data6,  # rightFsr
-        data7,  # leftFsr
-        data8,  # minSV
-        data9,  # maxSV
-        data10,  # battery
-        data11,  # maxSA
-        data12,  # minSA
-        data13,  # maxFSR
-        data14,  # stancetime
-        data15,  # swingtime
+        data6,  # rightToeFsr
+        data7,  # leftToeFsr
+        data8,  # rightHeelFsr
+        data9,  # leftHeelFsr
+        data10, # rightAnkleAngle
+        data11, #leftAnkleAngle
+        data12,  # minSV
+        data13,  # maxSV
+        data14,  # minSA
+        data15,  # maxSA
+        data16,  # battery
+        data17,  # maxFSR
+        data18,  # stancetime
+        data19,  # swingtime      
     ):
         self.data0 = data0
         self.data1 = data1
@@ -52,3 +60,7 @@ class ChartData:
         self.data13 = data13
         self.data14 = data14
         self.data15 = data15
+        self.data16 = data16
+        self.data17 = data17
+        self.data18 = data18
+        self.data19 = data19
