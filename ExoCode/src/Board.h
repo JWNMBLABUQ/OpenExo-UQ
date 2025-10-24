@@ -46,6 +46,7 @@
                 const unsigned int sync_default_pin = 25;
 				
 				//For Maxon PCB only
+<<<<<<< Updated upstream
 				const unsigned int maxon_err_right_pin = not_connected_pin;
 				const unsigned int maxon_err_left_pin = not_connected_pin;
 				const unsigned int maxon_ctrl_left_pin = not_connected_pin;
@@ -61,6 +62,20 @@
 				
 				//Battery voltage sensing pin (for 0.5.1 Mark 3 only)
 				const unsigned int volt_sense = not_connected_pin;
+=======
+				const unsigned int maxon_err_right_pin;
+				const unsigned int maxon_err_left_pin;
+				const unsigned int maxon_ctrl_left_pin;
+				const unsigned int maxon_ctrl_right_pin;
+				const unsigned int maxon_current_left_pin;
+				const unsigned int maxon_current_right_pin;
+				const unsigned int maxon_pwm_neutral_val;
+				const unsigned int maxon_pwm_u_bound;
+				const unsigned int maxon_pwm_l_bound;
+				
+				//Servo motor pins
+				const unsigned int servo_pins;
+>>>>>>> Stashed changes
             #endif
 
             const unsigned int sync_led_on_state = LOW;
@@ -145,6 +160,7 @@
                 const unsigned int sync_default_pin = 5;
 				
 				//For Maxon PCB only
+<<<<<<< Updated upstream
 				const unsigned int maxon_err_right_pin = not_connected_pin;
 				const unsigned int maxon_err_left_pin = not_connected_pin;
 				const unsigned int maxon_ctrl_left_pin = not_connected_pin;
@@ -160,6 +176,20 @@
 				
 				//Battery voltage sensing pin (for 0.5.1 Mark 3 only)
 				const unsigned int volt_sense = not_connected_pin;
+=======
+				const unsigned int maxon_err_right_pin;
+				const unsigned int maxon_err_left_pin;
+				const unsigned int maxon_ctrl_left_pin;
+				const unsigned int maxon_ctrl_right_pin;
+				const unsigned int maxon_current_left_pin;
+				const unsigned int maxon_current_right_pin;
+				const unsigned int maxon_pwm_neutral_val;
+				const unsigned int maxon_pwm_u_bound;
+				const unsigned int maxon_pwm_l_bound;
+				
+				//Servo motor pins
+				const unsigned int servo_pins[] = {};
+>>>>>>> Stashed changes
             #endif
 
             //Arduino compiles all files not just the ones that are used so this is not under teensy to prevent errors
@@ -260,6 +290,7 @@
                 const unsigned int sync_default_pin = 5;
 				
 				//For Maxon PCB only
+<<<<<<< Updated upstream
 				const unsigned int maxon_err_right_pin = not_connected_pin;
 				const unsigned int maxon_err_left_pin = not_connected_pin;
 				const unsigned int maxon_ctrl_left_pin = not_connected_pin;
@@ -275,6 +306,20 @@
 				
 				//Battery voltage sensing pin (for 0.5.1 Mark 3 only)
 				const unsigned int volt_sense = not_connected_pin;
+=======
+				const unsigned int maxon_err_right_pin;
+				const unsigned int maxon_err_left_pin;
+				const unsigned int maxon_ctrl_left_pin;
+				const unsigned int maxon_ctrl_right_pin;
+				const unsigned int maxon_current_left_pin;
+				const unsigned int maxon_current_right_pin;
+				const unsigned int maxon_pwm_neutral_val;
+				const unsigned int maxon_pwm_u_bound;
+				const unsigned int maxon_pwm_l_bound;
+				
+				//Servo motor pins
+				const unsigned int servo_pins[] = {};
+>>>>>>> Stashed changes
             #endif
 
             //Arduino compiles all files not just the ones that are used so this is not under teensy to prevent errors
@@ -378,6 +423,7 @@
                 const unsigned int sync_default_pin = 5;
 				
 				//For Maxon PCB only
+<<<<<<< Updated upstream
 				const unsigned int maxon_err_right_pin = not_connected_pin;
 				const unsigned int maxon_err_left_pin = not_connected_pin;
 				const unsigned int maxon_ctrl_left_pin = not_connected_pin;
@@ -393,6 +439,20 @@
 				
 				//Battery voltage sensing pin (for 0.5.1 Mark 3 only)
 				const unsigned int volt_sense = not_connected_pin;//Set it to 27 to use the onboard voltage sensing. Refer to Config.h and modify RESISTOR_1 and RESISTOR_2 if needed.
+=======
+				const unsigned int maxon_err_right_pin;
+				const unsigned int maxon_err_left_pin;
+				const unsigned int maxon_ctrl_left_pin;
+				const unsigned int maxon_ctrl_right_pin;
+				const unsigned int maxon_current_left_pin;
+				const unsigned int maxon_current_right_pin;
+				const unsigned int maxon_pwm_neutral_val;
+				const unsigned int maxon_pwm_u_bound;
+				const unsigned int maxon_pwm_l_bound;
+				
+				//Servo motor pins
+				const unsigned int servo_pins[] = {};
+>>>>>>> Stashed changes
             #endif
 
             //Arduino compiles all files not just the ones that are used so this is not under teensy to prevent errors
@@ -468,9 +528,15 @@
 				//Maxon motor Pins
 				const unsigned int maxon_err_right_pin = 37;
 				const unsigned int maxon_err_left_pin = 37;
+<<<<<<< Updated upstream
 				const unsigned int maxon_ctrl_left_pin = not_connected_pin;
 				const unsigned int maxon_ctrl_right_pin = A9;
 				const unsigned int maxon_current_left_pin = not_connected_pin;
+=======
+				const unsigned int maxon_ctrl_left_pin ;
+				const unsigned int maxon_ctrl_right_pin = A9;
+				const unsigned int maxon_current_left_pin ;
+>>>>>>> Stashed changes
 				const unsigned int maxon_current_right_pin = A1;
 				const unsigned int maxon_pwm_neutral_val = 2048;
 				const unsigned int maxon_pwm_u_bound = 3690;
@@ -478,9 +544,12 @@
 				
 				//Servo motor pins
 				const unsigned int servo_pins[] = {26,27};
+<<<<<<< Updated upstream
 				
 				//Battery voltage sensing pin (for 0.5.1 Mark 3 only)
 				const unsigned int volt_sense = not_connected_pin;
+=======
+>>>>>>> Stashed changes
 			 
 				//Serial Pins, NC
 				const unsigned int rx1_pin = not_connected_pin;
@@ -491,8 +560,13 @@
 				const unsigned int can_tx_pin = not_connected_pin;
 				
 				//FSR Pins
+<<<<<<< Updated upstream
 				const unsigned int fsr_sense_left_heel_pin = not_connected_pin;
 				const unsigned int fsr_sense_left_toe_pin = not_connected_pin;
+=======
+				const unsigned int fsr_sense_left_heel_pin ;
+				const unsigned int fsr_sense_left_toe_pin ;
+>>>>>>> Stashed changes
 				const unsigned int fsr_sense_right_heel_pin= 17;
 				const unsigned int fsr_sense_right_toe_pin = 16;
 				
@@ -547,8 +621,18 @@
 				
 				const unsigned int speed_check_pin = not_connected_pin;
 				
+<<<<<<< Updated upstream
 				const unsigned int left_ankle_angle_pin = not_connected_pin;
 				const unsigned int right_ankle_angle_pin = A8;
+=======
+<<<<<<< HEAD
+				const unsigned int left_ankle_angle_pin = A13;
+				const unsigned int right_ankle_angle_pin = A12;
+=======
+				const unsigned int left_ankle_angle_pin ;
+				const unsigned int right_ankle_angle_pin = A8;
+>>>>>>> upstream/main
+>>>>>>> Stashed changes
 				
 				// I2C 
 				// SDA 18
