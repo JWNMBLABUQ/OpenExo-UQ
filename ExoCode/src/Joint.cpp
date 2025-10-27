@@ -400,7 +400,6 @@ HipJoint::HipJoint(config_defs::joint_id id, ExoData* exo_data)
 , _chirp(id, exo_data)
 , _step(id, exo_data)
 , _proportional_hip_moment(id, exo_data)
-, _calibr_manager(id, exo_data)
 {
     #ifdef JOINT_DEBUG
         logger::print(_is_left ? "Left " : "Right ");
@@ -571,11 +570,8 @@ void HipJoint::set_controller(uint8_t controller_id)
         case (uint8_t)config_defs::hip_controllers::step:
             _controller = &_step;
             break;
-        case (uint8_t)config_defs::hip_controllers::phmc:
+        case (uint8_t)config_defs::hip_controllers::phmc :
             _controller = &_proportional_hip_moment;
-            break;
-		case (uint8_t)config_defs::hip_controllers::calibr_manager:
-            _controller = &_calibr_manager;
             break;
         default :
             logger::print("Unkown Controller!\n", LogLevel::Error);
@@ -595,7 +591,6 @@ KneeJoint::KneeJoint(config_defs::joint_id id, ExoData* exo_data)
 , _constant_torque(id, exo_data)
 , _chirp(id, exo_data)
 , _step(id, exo_data)
-, _calibr_manager(id, exo_data)
 {
     #ifdef JOINT_DEBUG
         logger::print(_is_left ? "Left " : "Right ");
@@ -764,9 +759,6 @@ void KneeJoint::set_controller(uint8_t controller_id)  //Changes the high level 
         case (uint8_t)config_defs::knee_controllers::step:
             _controller = &_step;
             break;
-		case (uint8_t)config_defs::knee_controllers::calibr_manager:
-            _controller = &_calibr_manager;
-            break;
         default :
             logger::print("Unkown Controller!\n", LogLevel::Error);
             _controller = &_zero_torque;
@@ -886,13 +878,13 @@ AnkleJoint::AnkleJoint(config_defs::joint_id id, ExoData* exo_data)
  */
 void AnkleJoint::run_joint()
 {
-	#ifdef JOINT_DEBUG
+    #ifdef JOINT_DEBUG
         logger::print("AnkleJoint::run_joint::Start");
     #endif
 
     //Angle Sensor data
     _joint_data->prev_joint_position = _joint_data->joint_position;
-    const float raw_angle = _joint_data->joint_RoM * _ankle_angle.get(_is_left, false);
+    const float raw_angle = _joint_data->joint_RoM * _ankle_angle.get();
     const float new_angle = _joint_data->do_flip_angle ? (_joint_data->joint_RoM - raw_angle):(raw_angle);
     _joint_data->joint_position = utils::ewma(new_angle, _joint_data->joint_position, _joint_data->joint_position_alpha);
     _joint_data->joint_velocity = utils::ewma((_joint_data->joint_position - _joint_data->prev_joint_position) / (1.0f / LOOP_FREQ_HZ), _joint_data->joint_velocity, _joint_data->joint_velocity_alpha);
