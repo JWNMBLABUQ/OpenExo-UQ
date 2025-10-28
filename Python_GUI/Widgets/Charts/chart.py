@@ -90,7 +90,7 @@ class TopPlot(BasePlot):
             top_measure = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data1
             )
-            Title = "Right Torque and Set"
+            title = "Right Torque and Set"
         if chart_selection == "Data 4-7":
             top_controller = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data4
@@ -108,7 +108,7 @@ class TopPlot(BasePlot):
             title = "Right"
             bottom_limit = 0
             top_limit = 1.1  
-        elif chart_selection == "Ankle Angle":
+        elif chart_selection == "Left Ankle Angle":
             top_measure = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data10
             )
@@ -146,7 +146,7 @@ class BottomPlot(BasePlot):
             top_measure = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data3
             )
-            Title = "Left Torque and Set"
+            title = "Left Torque and Set"
         if chart_selection == "Data 4-7":
             top_controller = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data6
@@ -164,7 +164,7 @@ class BottomPlot(BasePlot):
             bottom_limit = 0
             top_limit = 1.1
             title = "Left"  
-        elif chart_selection == "Ankle Angle":
+        elif chart_selection == "Left Ankle Angle":
             top_measure = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data11
             )

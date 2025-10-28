@@ -32,6 +32,24 @@ class ScanWindow(tk.Frame):
     # Create all UI elements
     def create_widgets(self):
 
+        original_width, original_height = 804, 1088
+        scale_factor = 9  # or whatever you prefer
+
+        resized_width = int(original_width / scale_factor)
+        resized_height = int(original_height / scale_factor)
+
+        # Open + Resize
+        background_imageUQ = Image.open("./Resources/Images/NMB.png").convert("RGBA")
+        background_imageUQ = background_imageUQ.resize((resized_width, resized_height), Image.Resampling.LANCZOS)
+        self.background_bg_imageUQ = ImageTk.PhotoImage(background_imageUQ)
+
+
+        # Make the Canvas match the new width/height
+        canvas = tk.Canvas(self, width=resized_width, height=resized_height, highlightthickness=0)  
+        canvas.create_image(0, 0, image=self.background_bg_imageUQ, anchor="nw")
+        canvas.grid(row=7, column=0, sticky="sw", padx=5, pady=10) # Place the canvas in the bottom left-hand corner
+       
+        
         original_width, original_height = 1939, 354
         scale_factor = 9  # or whatever you prefer
 
@@ -39,9 +57,9 @@ class ScanWindow(tk.Frame):
         resized_height = int(original_height / scale_factor)
 
         # Open + Resize
-        background_imageUQ = Image.open("./Resources/Images/LabLogo.png").convert("RGBA")
-        background_imageUQ = background_imageUQ.resize((resized_width, resized_height), Image.Resampling.LANCZOS)
-        self.background_bg_image = ImageTk.PhotoImage(background_imageUQ)
+        background_image = Image.open("./Resources/Images/LabLogo.png").convert("RGBA")
+        background_image = background_image.resize((resized_width, resized_height), Image.Resampling.LANCZOS)
+        self.background_bg_image = ImageTk.PhotoImage(background_image)
 
         # Make the Canvas match the new width/height
         canvas = tk.Canvas(self, width=resized_width, height=resized_height, highlightthickness=0)

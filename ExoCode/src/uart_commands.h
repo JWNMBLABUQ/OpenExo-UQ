@@ -369,6 +369,8 @@ namespace UART_command_handlers
             rx_msg.data[7] = exo_data->left_side.toe_fsr;                                               //Second Tab - Bottom Orange Line
             rx_msg.data[8] = exo_data->right_side.heel_fsr;                                             //Not Plotted, Saved
             rx_msg.data[9] = exo_data->left_side.heel_fsr;                                              //Not Plotted, Saved
+			rx_msg.data[10] = exo_data->right_side.ankle.joint_position;								//Not Plotted, Not tested if saved yet
+			rx_msg.data[11] = exo_data->left_side.ankle.joint_position;									// Not Plotted, Not tested if saved yet
 			
 			// ADD ANKLE DATA; 
             break;
@@ -453,6 +455,8 @@ namespace UART_command_handlers
             rx_msg.data[7] = exo_data->left_side.toe_fsr;                                               //Second Tab - Bottom Orange Line
             rx_msg.data[8] = exo_data->right_side.heel_fsr;                                             //Not Plotted, Saved
             rx_msg.data[9] = exo_data->left_side.heel_fsr;                                              //Not Plotted, Saved
+			rx_msg.data[10] = exo_data->right_side.ankle.joint_position;								//Not Plotted, Not tested if saved yet
+			rx_msg.data[11] = exo_data->left_side.ankle.joint_position;									// Not Plotted, Not tested if saved yet
             break;
         }
 

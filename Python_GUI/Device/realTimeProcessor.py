@@ -87,20 +87,24 @@ class RealTimeProcessor:
     def processGeneralData(
         self, payload, datalength
     ):  # Place general data derived from message to Exo data
+        print("Payload:", payload)
+        print("Len:", len(payload))
+        print("datalength:", len(datalength))
+                
         self.x_time += 1
-        data0 = payload[0] if len(payload) > 0 else 0  # rightTorque
-        data1 = payload[1] if len(payload) > 1 else 0  # rightState
-        data2 = payload[2] if len(payload) > 2 else 0  # rightSet
-        data3 = payload[3] if len(payload) > 3 else 0  # leftTorque
-        data4 = payload[4] if len(payload) > 4 else 0  # leftState
-        data5 = payload[5] if len(payload) > 5 else 0  # leftSet
-        data6 = payload[6] if datalength >= 7 and len(payload) > 6 else 0  # rightToeFsr
-        data7 = payload[7] if datalength >= 8 and len(payload) > 7 else 0  # leftToeFsr
-        data8 = payload[8] if datalength >= 9 and len(payload) > 8 else 0  # rightHeelFsr
-        data9 = payload[9] if datalength >= 10 and len(payload) > 9 else 0  # leftHeelFsr
-        data10 = 5 #payload[10] if datalength >= 11 and len(payload) > 10 else 0  # rightAnkleAngle      #temporarily fixed input since without data input none of the plots will run
-        data11 = -5 #payload[11] if datalength >= 12 and len(payload) > 11 else 0  # leftAnkleAngle      #temporarily fixed input since without data input none of the plots will run
-        data12 = payload[12] if datalength >= 13 and len(payload) > 12 else 0  # minSV                   #once getting ankle data, will need to fix subsequent indices in this section
+        data0 = payload[0] if len(payload) > 1 else 0  # right_side.ankle.controller.filtered_torque_reading
+        data1 = payload[1] if len(payload) > 2 else 0  # right_side.ankle.controller.ff_setpoint
+        data2 = payload[2] if len(payload) > 3 else 0  # left_side.ankle.controller.filtered_torque_reading
+        data3 = payload[3] if len(payload) > 4 else 0  # left_side.ankle.controller.ff_setpoint
+        data4 = payload[4] if len(payload) > 5 else 0  # right_side.toe_stance
+        data5 = payload[5] if len(payload) > 6 else 0  # right_side.toe_fsr
+        data6 = payload[6] if len(payload) >= 7 and len(payload) > 6 else 0  # left_side.toe_stance
+        data7 = payload[7] if len(payload) >= 8 and len(payload) > 7 else 0  # left_side.toe_fsr
+        data8 = payload[8] if len(payload) >= 9 and len(payload) > 8 else 0  # right_side.heel_fsr
+        data9 = payload[9] if len(payload) >= 10 and len(payload) > 9 else 0  # left_side.heel_fsr
+        data10 = payload[10] if datalength >= 11 and len(payload) > 10 else 0  # right_side.ankle.joint_position        
+        data11 = payload[11] if datalength >= 12 and len(payload) > 11 else 0  # left_side.ankle.joint_position        
+        data12 = payload[12] if datalength >= 13 and len(payload) > 12 else 0  # minSV 
         data13 = payload[13] if datalength >= 14 and len(payload) > 13 else 0  # maxSV
         data14 = payload[14] if datalength >= 15 and len(payload) > 14 else 0  # minSA
         data15 = payload[15] if datalength >= 16 and len(payload) > 15 else 0  # maxSA
@@ -108,20 +112,22 @@ class RealTimeProcessor:
         data17 = payload[17] if datalength >= 18 and len(payload) > 17 else 0  # maxFSR
         data18 = payload[18] if datalength >= 19 and len(payload) > 18 else 0  # stancetime
         data19 = payload[19] if datalength >= 20 and len(payload) > 19 else 0  # swingtime
+        
+
 
         self._chart_data.updateValues(
             data0,  # rightTorque
-            data1,  # rightState
-            data2,  # rightSet
-            data3,  # leftTorque
-            data4,  # leftState
-            data5,  # leftSet
-            data6,  # rightToeFsr
-            data7,  # leftToeFsr
+            data1,  # rightSet
+            data2,  # leftTorque
+            data3,  # leftSet
+            data4,  # right_side.toe_stance
+            data5,  # right_side.toe_fsr
+            data6,  # left_side.toe_stance
+            data7,  # left_side.toe_fsr
             data8,  # rightHeelFsr
             data9,  # leftHeelFsr
             data10, # rightAnkleAngle
-            data11, #leftAnkleAngle
+            data11, # leftAnkleAngle
             data12,  # minSV
             data13,  # maxSV
             data14,  # minSA
