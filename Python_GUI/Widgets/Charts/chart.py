@@ -105,14 +105,14 @@ class TopPlot(BasePlot):
             top_measure = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data8
             )
-            title = "Right"
+            title = "Right Heel FSR"
             bottom_limit = 0
             top_limit = 1.1  
-        elif chart_selection == "Left Ankle Angle":
+        elif chart_selection == "Ankle Angle":
             top_measure = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data10
             )
-            title = "Right"
+            title = "Right Ankle Angle"
             bottom_limit = 0
             top_limit = 1.1
 
@@ -163,14 +163,14 @@ class BottomPlot(BasePlot):
             )
             bottom_limit = 0
             top_limit = 1.1
-            title = "Left"  
-        elif chart_selection == "Left Ankle Angle":
+            title = "Left Heel FSR"  
+        elif chart_selection == "Ankle Angle":
             top_measure = (
                 self.master.controller.deviceManager._realTimeProcessor._chart_data.data11
             )
             bottom_limit = 0
             top_limit = 1.1
-            title = "Left"
+            title = "Left Ankle Angle"
 
         if top_controller is None:
              top_controller = 0

@@ -87,9 +87,9 @@ class RealTimeProcessor:
     def processGeneralData(
         self, payload, datalength
     ):  # Place general data derived from message to Exo data
-        print("Payload:", payload)
-        print("Len:", len(payload))
-        print("datalength:", len(datalength))
+        # print("Payload:", payload)
+        # print("Len:", len(payload))
+        # print("datalength:", datalength)
                 
         self.x_time += 1
         data0 = payload[0] if len(payload) > 1 else 0  # right_side.ankle.controller.filtered_torque_reading
@@ -102,16 +102,16 @@ class RealTimeProcessor:
         data7 = payload[7] if len(payload) >= 8 and len(payload) > 7 else 0  # left_side.toe_fsr
         data8 = payload[8] if len(payload) >= 9 and len(payload) > 8 else 0  # right_side.heel_fsr
         data9 = payload[9] if len(payload) >= 10 and len(payload) > 9 else 0  # left_side.heel_fsr
-        data10 = payload[10] if datalength >= 11 and len(payload) > 10 else 0  # right_side.ankle.joint_position        
-        data11 = payload[11] if datalength >= 12 and len(payload) > 11 else 0  # left_side.ankle.joint_position        
-        data12 = payload[12] if datalength >= 13 and len(payload) > 12 else 0  # minSV 
-        data13 = payload[13] if datalength >= 14 and len(payload) > 13 else 0  # maxSV
-        data14 = payload[14] if datalength >= 15 and len(payload) > 14 else 0  # minSA
-        data15 = payload[15] if datalength >= 16 and len(payload) > 15 else 0  # maxSA
-        data16 = payload[16] if datalength >= 17 and len(payload) > 16 else 0  # battery
-        data17 = payload[17] if datalength >= 18 and len(payload) > 17 else 0  # maxFSR
-        data18 = payload[18] if datalength >= 19 and len(payload) > 18 else 0  # stancetime
-        data19 = payload[19] if datalength >= 20 and len(payload) > 19 else 0  # swingtime
+        data10 = payload[10] if len(payload) >= 11 and len(payload) > 10 else -1  # right_side.ankle.joint_position        
+        data11 = payload[11] if len(payload) >= 12 and len(payload) > 11 else 1  # left_side.ankle.joint_position        
+        data12 = payload[12] if len(payload) >= 13 and len(payload) > 12 else 0  # minSV 
+        data13 = payload[13] if len(payload) >= 14 and len(payload) > 13 else 0  # maxSV
+        data14 = payload[14] if len(payload) >= 15 and len(payload) > 14 else 0  # minSA
+        data15 = payload[15] if len(payload) >= 16 and len(payload) > 15 else 0  # maxSA
+        data16 = payload[16] if len(payload) >= 17 and len(payload) > 16 else 0  # battery
+        data17 = payload[17] if len(payload) >= 18 and len(payload) > 17 else 0  # maxFSR
+        data18 = payload[18] if len(payload) >= 19 and len(payload) > 18 else 0  # stancetime
+        data19 = payload[19] if len(payload) >= 20 and len(payload) > 19 else 0  # swingtime
         
 
 

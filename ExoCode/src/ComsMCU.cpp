@@ -47,7 +47,7 @@ ComsMCU::ComsMCU(ExoData* data, uint8_t* config_to_send):_data{data}
             rt_data_len = rt_data::BILATERAL_HIP_ANKLE_RT_LEN;
             break;
         default:
-            rt_data_len = 8;
+            rt_data_len = 12;
             break;
     }
 
