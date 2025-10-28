@@ -72,12 +72,12 @@ class ActiveTrial(tk.Frame):
         self.timer_label = ttk.Label(self, text="Time: 0:00", font=(self.fontstyle, 12))
         self.timer_label.grid(row=0, column=4, pady=(50,0),padx=(0,0),sticky="e")  # Placed above the battery label
 
-        # For battery Label
-        batteryPercentLabel = ttk.Label(self, 
+        # For battery Label - using tk.Label instead of ttk.Label to support color changes
+        self.batteryPercentLabel = tk.Label(self, 
             textvariable=self.controller.deviceManager._realTimeProcessor._exo_data.BatteryPercent, 
                 font=(self.fontstyle, 12))
         # batteryPercentLabel.pack(side=TOP, anchor=E, pady=0, padx=0)
-        batteryPercentLabel.grid(row=0, column=4,padx=(0,0), pady=(10,0),sticky ="e")
+        self.batteryPercentLabel.grid(row=0, column=4,padx=(0,0), pady=(10,0),sticky ="e")
 
         # Create and place the top plot
         self.topPlot = TopPlot(self)
@@ -205,15 +205,21 @@ class ActiveTrial(tk.Frame):
             self.grid_columnconfigure(j, weight=1)
             
     def toggle_chart(self):
-        """Toggle between 'Controller' and 'Sensor' for the chart."""
+        """Cycle through chart selections in order."""
         current = self.chartVar.get()
-        if current == "Data 0-3":
-            self.chartVar.set("Data 4-7")
-            self.chartButton.config(text="Data 4-7")
+        chart_order = ["Data 0-3", "Data 4-7", "Heel FSR", "Ankle Angle"]
+                                                                                               # Find the next chart in the list
+        if current in chart_order:
+            current_index = chart_order.index(current)
+            next_index = (current_index + 1) % len(chart_order)                                # wrap around
+            next_chart = chart_order[next_index]
         else:
-            self.chartVar.set("Data 0-3")
-            self.chartButton.config(text="Data 0-3")
-        self.newSelection()
+            next_chart = chart_order[0]                                                        # default to first if current is invalid
+    
+        self.chartVar.set(next_chart)                                                          #Update the variable and button text
+        self.chartButton.config(text=next_chart)
+    
+        self.newSelection()                                                                    #Trigger the chart update
 
     def set_graph(self, selection):
         """Set the graph display based on the button clicked."""
@@ -308,6 +314,8 @@ class ActiveTrial(tk.Frame):
         self.controller.trial.loadDataToCSV(
             self.controller.deviceManager, True
         )  # Load data from Exo into CSV
+        # Reset mark value after trial ends due to disconnection
+        self.controller.deviceManager._realTimeProcessor._exo_data.resetMark()
         self.controller.show_frame("ScanWindow")# Navigate back to the scan page
         self.controller.frames["ScanWindow"].show()  # Call show method to reset elements
 
@@ -325,6 +333,13 @@ class ActiveTrial(tk.Frame):
         self.controller.frames["UpdateTorque"].previous_frame = "ActiveTrial"
         self.controller.show_frame("UpdateTorque")
 
+    def update_battery_color(self):
+        """Update battery label color based on battery status"""
+        if self.controller.deviceManager._realTimeProcessor._exo_data.battery_is_low:
+            self.batteryPercentLabel.config(fg="red")
+        else:
+            self.batteryPercentLabel.config(fg="black")
+    
     def update_plots(self, selection):
         # Cancel the previous update job if it exists
         if self.plot_update_job:
@@ -334,6 +349,9 @@ class ActiveTrial(tk.Frame):
         # Only continue updating plots if the flag is set to True
         if not self.is_plotting:
             return
+        
+        # Update battery color
+        self.update_battery_color()
 
         # Determine which plots to animate based on the graph selection
         graph_selection = self.graphVar.get()
@@ -444,6 +462,8 @@ class ActiveTrial(tk.Frame):
         self.controller.trial.loadDataToCSV(
             self.controller.deviceManager
         )  # Load data from Exo into CSV
+        # Reset mark value after trial ends
+        self.controller.deviceManager._realTimeProcessor._exo_data.resetMark()
 
     async def on_mark_button_clicked(self):
         self.controller.deviceManager._realTimeProcessor._exo_data.MarkVal += 1
@@ -459,3 +479,5 @@ class ActiveTrial(tk.Frame):
             self.controller.trial.loadDataToCSV(
                 self.controller.deviceManager
             )  # Load data from Exo into CSV
+            # Reset mark value after saving CSV for new trial
+            self.controller.deviceManager._realTimeProcessor._exo_data.resetMark()

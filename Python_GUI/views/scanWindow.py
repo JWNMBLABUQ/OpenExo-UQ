@@ -39,9 +39,9 @@ class ScanWindow(tk.Frame):
         resized_height = int(original_height / scale_factor)
 
         # Open + Resize
-        background_image = Image.open("./Resources/Images/LabLogo.png").convert("RGBA")
-        background_image = background_image.resize((resized_width, resized_height), Image.Resampling.LANCZOS)
-        self.background_bg_image = ImageTk.PhotoImage(background_image)
+        background_imageUQ = Image.open("./Resources/Images/LabLogo.png").convert("RGBA")
+        background_imageUQ = background_imageUQ.resize((resized_width, resized_height), Image.Resampling.LANCZOS)
+        self.background_bg_image = ImageTk.PhotoImage(background_imageUQ)
 
         # Make the Canvas match the new width/height
         canvas = tk.Canvas(self, width=resized_width, height=resized_height, highlightthickness=0)
@@ -66,7 +66,7 @@ class ScanWindow(tk.Frame):
         style.configure('TListbox', font=(self.fontstyle, 14))
 
         # Title label on top of the image
-        titleLabel = ttk.Label(self, text="OpenExo GUI V1.05", font=(self.fontstyle, 30))
+        titleLabel = ttk.Label(self, text="OpenExo GUI V1.06 (UQ's Version)", font=(self.fontstyle, 30))
         titleLabel.grid(row=1, column=0, columnspan=2, pady=0, sticky="n")  # Center instructions
         
         # Initial device name display
