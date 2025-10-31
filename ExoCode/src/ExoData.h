@@ -130,6 +130,7 @@ class ExoData
         SideData right_side;    /**< Data for the right side */
 
         uint32_t mark;          /**< Used for timing, currently only used by the nano */
+		bool markFlag;
 
         uint8_t* config;        /**< Pointer to the configuration array */
         uint8_t config_len;     /**< Length of the configuration array */

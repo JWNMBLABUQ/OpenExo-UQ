@@ -45,6 +45,8 @@ namespace UART_command_names
     static const uint8_t update_error_code = 0x16;
     static const uint8_t get_FSR_thesholds = 0x17;
     static const uint8_t update_FSR_thesholds = 0x18;
+/* 	static const uint8_t get_mark_signal = 0x19; // for sync function
+    static const uint8_t update_mark_signal = 0x20;	 */
 };
 
 /**
@@ -573,6 +575,15 @@ namespace UART_command_handlers
         exo_data->left_side.toe_fsr_upper_threshold = msg.data[(uint8_t)UART_command_enums::FSR_thresholds::LEFT_THRESHOLD] + fsr_config::SCHMITT_DELTA;
         exo_data->left_side.toe_fsr_lower_threshold = msg.data[(uint8_t)UART_command_enums::FSR_thresholds::LEFT_THRESHOLD] - fsr_config::SCHMITT_DELTA;
     }
+/* 	inline static void get_mark_signal(UARTHandler *handler, ExoData *exo_data, UART_msg_t msg)
+    {
+
+    }
+	inline static void update_mark_signal(UARTHandler *handler, ExoData *exo_data, UART_msg_t msg)
+    {
+		SyncLed.trigger();
+    }
+ */
 };
 
 namespace UART_command_utils
@@ -770,7 +781,13 @@ namespace UART_command_utils
         case UART_command_names::update_FSR_thesholds:
             UART_command_handlers::update_FSR_thesholds(handler, exo_data, msg);
             break;
-
+	
+/* 		case UART_command_names::get_mark_signal:
+            UART_command_handlers::get_mark_signal(handler, exo_data, msg);
+            break;
+        case UART_command_names::update_mark_signal:
+            UART_command_handlers::update_mark_signal(handler, exo_data, msg);
+            break; */
 
         default:
             logger::println("UART_command_utils::handle_message->Unknown Message!", LogLevel::Error);

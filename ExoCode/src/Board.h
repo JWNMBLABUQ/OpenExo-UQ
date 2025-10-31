@@ -189,8 +189,8 @@
                 
                 const unsigned int speed_check_pin = 33;
 
-                const unsigned int left_ankle_angle_pin;
-                const unsigned int right_ankle_angle_pin;
+                const unsigned int left_ankle_angle_pin = A13;
+                const unsigned int right_ankle_angle_pin = A12;
             #endif
             
             const unsigned int motor_enable_on_state = HIGH;
@@ -298,8 +298,8 @@
                 
                 const unsigned int speed_check_pin = 33;
 
-                const unsigned int left_ankle_angle_pin;
-                const unsigned int right_ankle_angle_pin;
+                const unsigned int left_ankle_angle_pin = A13;
+                const unsigned int right_ankle_angle_pin = A12;
             #endif
             
             const unsigned int motor_enable_on_state = HIGH;
@@ -476,8 +476,8 @@
 				//const unsigned int torque_sensor_right1 = A8;
 				
 				//Sync LED Pins
-				const unsigned int sync_led_pin ;
-				const unsigned int sync_default_pin ;
+				const unsigned int sync_led_pin = 9; // connect to output BNC
+				const unsigned int sync_default_pin;
 			#endif
 			
             //Arduino compiles all files not just the ones that are used so this is not under teensy to prevent errors

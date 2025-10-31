@@ -21,6 +21,7 @@ ExoData::ExoData(uint8_t* config_to_send)
     this->config_len = ini_config::number_of_keys;
 
     this->mark = 10;  
+	this->markFlag = false;  
 
     this->error_code = static_cast<int>(NO_ERROR);
     this->error_joint_id = 0;
