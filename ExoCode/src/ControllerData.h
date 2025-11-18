@@ -201,7 +201,7 @@ namespace controller_defs                   /**< Stores the parameter indexes fo
         const uint8_t kd = 8;
 		const uint8_t step_response_mode = 10;                  //Not currently used
 		const uint8_t ki = 11;
-		const uint8_t do_use_servo = 12;
+		const uint8_t do_use_servo = 12; 						//Hijack do_use_servo for SYNC
 		const uint8_t fsr_servo_threshold = 13;
 		const uint8_t servo_origin = 14;
 		const uint8_t servo_terminal = 15;
@@ -314,6 +314,13 @@ class ControllerData {
         //Variables for the PHMC Controller
         float fs;
         float state;
+		
+		//Variables for James' new Mark function
+		uint8_t old_mark_val = 0;
+		unsigned long previousMillis = 0;
+		unsigned long stopwatch_mark = 0;
+		uint8_t syncPinValue  = 0;
+		
 };      
 
 #endif

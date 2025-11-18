@@ -476,7 +476,7 @@
 				//const unsigned int torque_sensor_right1 = A8;
 				
 				//Sync LED Pins
-				const unsigned int sync_led_pin = 9; // connect to output BNC
+				const unsigned int sync_led_pin; // connect to output BNC, sync_led_pin = 9;
 				const unsigned int sync_default_pin;
 			#endif
 			

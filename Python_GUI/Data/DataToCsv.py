@@ -20,10 +20,14 @@ class CsvWritter:
         lSetP = ["Data 5"]
         rFsr = ["Data 6"]
         lFsr = ["Data 7"]
+        rFsrHeel = ["Data 8"]
+        lFsrHeel = ["Data 9"]
+        rAngle = ["Data 10"]
+        lAngle = ["Data 11"]
 
         #record our model features
-        minSV = ["Data 8"]
-        maxSV = ["Data 9"]
+        minSV = ["Data 12"]
+        maxSV = ["Data 13"]
         # minSA = ["minSA"]
         # maxSA = ["maxSA"]
         # maxFSR = ["maxFSR"]
@@ -54,10 +58,18 @@ class CsvWritter:
             rFsr.append(rF)
         for lF in exoData.lFsr:
             lFsr.append(lF)
-        for max in exoData.MaxShankVel:
-            maxSV.append(max)
-        for min in exoData.MinShankVel:
-            minSV.append(min)
+        for rFH in exoData.rHeelFsr:
+            rFsrHeel.append(0) #rFsrHeel.append(rFH) To fix!
+        for lFH in exoData.lHeelFsr:
+            lFsrHeel.append(lFH)
+        for rA in exoData.lAnkleAngle:
+            rAngle.append(rA)
+        for lA in exoData.lHeelFsr:
+            lAngle.append(lA)
+        #for SyncSig in exoData.MaxShankVel:
+        #    maxSV.append(SyncSig)
+        #for SyncSig in exoData.MinShankVel:
+        #    minSV.append(SyncSig)
         # for inSA in exoData.MinShankAng:
         #     minSA.append(inSA)
         # for axSA in exoData.MaxShankAng:
@@ -66,7 +78,11 @@ class CsvWritter:
         #     maxFSR.append(fsr)
         # for task in exoData.Task:
         #     Task.append(task)
-        for trig in exoData.Mark:
+        
+        #for trig in exoData.Mark:
+        #    mark.append(trig)
+            
+        for trig in exoData.rHeelFsr:
             mark.append(trig)
         # for moment in exoData.StanceTime:
         #     stancetime.append(moment)
@@ -86,8 +102,10 @@ class CsvWritter:
         fileData.append(lSetP)
         fileData.append(rFsr)
         fileData.append(lFsr)
-        fileData.append(minSV)
-        fileData.append(maxSV)
+        fileData.append(rFsrHeel)
+        fileData.append(lFsrHeel)
+        fileData.append(rAngle)
+        fileData.append(lAngle)
 
         # fileData.append(minSA)
         # fileData.append(maxSA)
@@ -138,7 +156,8 @@ class CsvWritter:
             "tStep", "rTorque", "rSetP", "rState",
             "lTorque", "lSetP", "lState",
             "lFsr", "rFsr",
-             "MinShankVel", "MaxShankVel",
+            "rHeelFsr", "lHeelFsr",
+             "rAnkleAngle", "lAnkleAngle",
             # "MinShankAng", "MaxShankAng",
             # "MaxFSR", "StanceTime", "SwingTime","Task", 
             "Mark", "epochTime"

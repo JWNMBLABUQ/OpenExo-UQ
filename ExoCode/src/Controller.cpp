@@ -2181,7 +2181,71 @@ float PJMC_PLUS::calc_motor_cmd()
 	float percent_grf_heel = constrain(_side_data->heel_fsr, 0, 1.5);
 	float cmd_ff = _pjmc_generic(percent_grf, threshold, dorsi_setpoint, -plantar_setpoint);
 	cmd_ff = min(dorsi_setpoint, cmd_ff); //cap the dorsiflexion setpoint
+	
+	
+	if (!_joint_data->is_left)
+    {
+		//Hijack do_use_servo for SYNC
+		//_controller_data->old_mark_val = 
+		unsigned long duration_mark = 125; //half, unit: ms 
+		unsigned long currentMillis = millis();
 
+		switch ((uint8_t)_controller_data->parameters[controller_defs::pjmc_plus::do_use_servo])
+		{
+		case 0:
+		{
+			digitalWrite(9,LOW);
+			break;
+		}
+		case 1:
+		{
+			if (_controller_data->parameters[controller_defs::pjmc_plus::do_use_servo] !=_controller_data->old_mark_val) {
+				_controller_data->stopwatch_mark = millis();
+			}
+			if (millis() - _controller_data->stopwatch_mark < 500) {
+				digitalWrite(9,HIGH);
+				_controller_data->syncPinValue = 1;
+			}
+			else {
+				if (currentMillis - _controller_data->previousMillis < duration_mark){
+					digitalWrite(9,LOW);
+					_controller_data->syncPinValue = 0;
+				}
+				else if (currentMillis - _controller_data->previousMillis < duration_mark * 2){
+					digitalWrite(9,HIGH);
+					_controller_data->syncPinValue = 1;
+				}
+				else{
+					_controller_data->previousMillis = currentMillis;
+					digitalWrite(9,LOW);
+					_controller_data->syncPinValue = 0;
+				}
+			}
+			break;
+		}
+		case 2:
+		{
+			digitalWrite(9,LOW);
+			_controller_data->syncPinValue = 0;
+		}
+		default:
+		{
+			digitalWrite(9,LOW);
+			_controller_data->syncPinValue = 0;
+			break;
+		}
+		}
+		_controller_data->old_mark_val = _controller_data->parameters[controller_defs::pjmc_plus::do_use_servo];
+		
+		// Serial print analogRead from pins A12 and A13
+		Serial.print("\nPins A13 (Left) and A12 (Right) read: ");
+		Serial.print(analogRead(A13));
+		Serial.print(", and ");
+		Serial.print(analogRead(A12));
+		Serial.print(".");
+		//
+	}
+	
 	// if (!_joint_data->is_left){
 		// Serial.print("\nRunning pjmcPlus...");
 		// Serial.print(cmd_ff);

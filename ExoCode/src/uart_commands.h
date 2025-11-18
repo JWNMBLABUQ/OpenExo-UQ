@@ -369,10 +369,10 @@ namespace UART_command_handlers
             rx_msg.data[5] = exo_data->right_side.toe_fsr;                                              //Second Tab - Top Orange Line
             rx_msg.data[6] = exo_data->left_side.toe_stance;                                            //Second Tab - Bottom Blue Line
             rx_msg.data[7] = exo_data->left_side.toe_fsr;                                               //Second Tab - Bottom Orange Line
-            rx_msg.data[8] = exo_data->right_side.heel_fsr;                                             //Third Tab, saved 
+            rx_msg.data[8] = exo_data->right_side.ankle.controller.syncPinValue; ////right_side.heel_fsr;  HOT FIX TO SEND SYNC DATA //Third Tab, saved 
             rx_msg.data[9] = exo_data->left_side.heel_fsr;                                              //Third Tab, saved
-			rx_msg.data[10] = exo_data->right_side.ankle.joint_position;								//Fourth Tab, Not tested if saved yet
-			rx_msg.data[11] = exo_data->left_side.ankle.joint_position;									//Fourth Tab, Not tested if saved yet
+			rx_msg.data[10] = exo_data->right_side.ankle.joint_position;								//Fourth Tab, saved 
+			rx_msg.data[11] = exo_data->left_side.ankle.joint_position;									//Fourth Tab, saved
             break;
 
         case (uint8_t)config_defs::exo_name::bilateral_hip:
@@ -453,10 +453,10 @@ namespace UART_command_handlers
             rx_msg.data[5] = exo_data->right_side.toe_fsr;                                              //Second Tab - Top Orange Line
             rx_msg.data[6] = exo_data->left_side.toe_stance;                                            //Second Tab - Bottom Blue Line
             rx_msg.data[7] = exo_data->left_side.toe_fsr;                                               //Second Tab - Bottom Orange Line
-            rx_msg.data[8] = exo_data->right_side.heel_fsr;                                             //Third Tab, saved 
+            rx_msg.data[8] = exo_data->right_side.ankle.controller.syncPinValue; //exo_data->right_side.heel_fsr; HOT FIX TO SEND SYNC DATA                                            //Third Tab, saved 
             rx_msg.data[9] = exo_data->left_side.heel_fsr;                                              //Third Tab, saved
-			rx_msg.data[10] = exo_data->right_side.ankle.joint_position;								//Fourth Tab, Not tested if saved yet
-			rx_msg.data[11] = exo_data->left_side.ankle.joint_position;									//Fourth Tab, Not tested if saved yet
+			rx_msg.data[10] = exo_data->right_side.ankle.joint_position;								//Fourth Tab, saved 
+			rx_msg.data[11] = exo_data->left_side.ankle.joint_position;									//Fourth Tab, saved
             break;
         }
 
