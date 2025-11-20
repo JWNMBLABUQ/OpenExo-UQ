@@ -47,6 +47,12 @@ class ActiveTrial(tk.Frame):
         self.graphVar = StringVar()
         self.graphVar.set("Both Graphs")  # Default to "Both Graphs"
 
+        self.sync_mark_value = 0
+        self.sync_mark_button_text = StringVar(value="Sync Mark")
+        self.sync_mark_joint_idx = 5  # Right ankle in joint map
+        self.sync_mark_controller_id = 11.0
+        self.sync_mark_parameter_id = 12.0
+
         self.create_widgets()
 
     # Frame UI elements
@@ -145,15 +151,18 @@ class ActiveTrial(tk.Frame):
         )
         saveAndStartNewButton.grid(row=0, column=1)
 
+        # Left control column to stack pause icon and action buttons
+        self.leftControlFrame = ttk.Frame(self)
+        self.leftControlFrame.grid(row=1, column=0, rowspan=5, pady=20, sticky="N")
+
         # Pause/Play Icon as a Label (no button border)
-        self.pauseIconLabel = tk.Label(self, image=self.pause_icon, borderwidth=0, cursor="hand2")
-        self.pauseIconLabel.grid(row=1, column=0, sticky = N)
+        self.pauseIconLabel = tk.Label(self.leftControlFrame, image=self.pause_icon, borderwidth=0, cursor="hand2")
+        self.pauseIconLabel.pack(side=TOP, pady=(0, 20))
         self.pauseIconLabel.bind("<Button-1>", lambda event: async_handler(self.on_pause_button_clicked)())
 
-
         # Buttons at the bottom
-        button_frame = ttk.Frame(self)
-        button_frame.grid(row=1, column=0, rowspan=5, pady=125, sticky="NS")
+        button_frame = ttk.Frame(self.leftControlFrame)
+        button_frame.pack(side=TOP, fill=tk.BOTH, expand=True)
 
         updateTorqueButton = ttk.Button(
             button_frame,
@@ -197,6 +206,13 @@ class ActiveTrial(tk.Frame):
             command=async_handler(self.on_mark_button_clicked),
         )
         markButton.pack(side=TOP, pady=5)
+
+        self.syncMarkButton = ttk.Button(
+            button_frame,
+            textvariable=self.sync_mark_button_text,
+            command=async_handler(self.on_sync_mark_button_clicked),
+        )
+        self.syncMarkButton.pack(side=TOP, pady=5)
 
         # Configure grid weights for centering
         for i in range(7):
@@ -316,6 +332,7 @@ class ActiveTrial(tk.Frame):
         )  # Load data from Exo into CSV
         # Reset mark value after trial ends due to disconnection
         self.controller.deviceManager._realTimeProcessor._exo_data.resetMark()
+        self.reset_sync_mark_counter()
         self.controller.show_frame("ScanWindow")# Navigate back to the scan page
         self.controller.frames["ScanWindow"].show()  # Call show method to reset elements
 
@@ -448,6 +465,7 @@ class ActiveTrial(tk.Frame):
         
         await self.ShutdownExo()
         self.controller.frames["ScanWindow"].show()  # Call show method to reset elements
+        self.reset_sync_mark_counter()
 
         # Reset pause button to default state
         self.paused_flag = False
@@ -464,6 +482,7 @@ class ActiveTrial(tk.Frame):
         )  # Load data from Exo into CSV
         # Reset mark value after trial ends
         self.controller.deviceManager._realTimeProcessor._exo_data.resetMark()
+        self.reset_sync_mark_counter()
 
     async def on_mark_button_clicked(self):
         self.controller.deviceManager._realTimeProcessor._exo_data.MarkVal += 1
@@ -481,3 +500,48 @@ class ActiveTrial(tk.Frame):
             )  # Load data from Exo into CSV
             # Reset mark value after saving CSV for new trial
             self.controller.deviceManager._realTimeProcessor._exo_data.resetMark()
+            self.reset_sync_mark_counter()
+
+    def _update_sync_mark_button_label(self):
+        if self.sync_mark_value == 0:
+            self.sync_mark_button_text.set("Sync Mark READY?")
+        elif self.sync_mark_value == 1:
+            self.sync_mark_button_text.set("Sync Mark START!")
+        else:
+            self.sync_mark_button_text.set("Sync Mark STOP!")
+
+    def reset_sync_mark_counter(self):
+        self.sync_mark_value = 0
+        self._update_sync_mark_button_label()
+
+    async def on_sync_mark_button_clicked(self):
+        current_value = self.sync_mark_value
+        print("Joint ID: 36 (right ankle)")
+        print("Controller ID: 11")
+        print("Parameter ID: 12")
+        print(f"Value: {current_value}")
+
+        try:
+            await self.controller.deviceManager.updateTorqueValues(
+                [
+                    False,
+                    self.sync_mark_joint_idx,
+                    self.sync_mark_controller_id,
+                    self.sync_mark_parameter_id,
+                    float(current_value),
+                ]
+            )
+        except Exception as exc:
+            print(f"Failed to send sync mark update: {exc}")
+            messagebox.showerror("Sync Mark Error", f"Failed to send update: {exc}")
+            return
+            
+        if self.sync_mark_value <= 1:
+            self.sync_mark_value += 1
+        elif self.sync_mark_value == 2:
+            self.sync_mark_value = 0
+        else: 
+            print(f"sync mark > 2")
+          
+            
+        self._update_sync_mark_button_label()
